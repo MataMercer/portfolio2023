@@ -2,6 +2,25 @@
 	import { page } from '$app/stores';
 	import github from '$lib/images/github.svg';
 	import logo from '$lib/images/matamercerlogo2020.svg';
+
+	const navLinks = [
+		{
+			text: 'Home',
+			link: '/'
+		},
+		{
+			text: 'Portfolio',
+			link: '/portfolio'
+		},
+		{
+			text: 'About',
+			link: '/about'
+		},
+		{
+			text: 'Contact',
+			link: '/contact'
+		}
+	];
 </script>
 
 <header>
@@ -10,7 +29,9 @@
 			<path d="M0,3 L2,3 L2,0 Z" />
 		</svg>
 
-		<ul>
+		<ul
+			class="relative p-0 m-0 h-auto flex justify-center items-center bg-contain flex-wrap list-none"
+		>
 			<li class="brand">
 				<a href="/">
 					<img src={logo} alt="SvelteKit" />
@@ -19,30 +40,17 @@
 					<div class="brand-text">Mercer Denholm</div>
 				</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<svg viewBox="0 0 2 3" aria-hidden="true">
-					<path d="M0,0 L0,3 L2,0 Z" />
-				</svg>
-				<a href="/">Home</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/portfolio' ? 'page' : undefined}>
-				<svg viewBox="0 0 2 3" aria-hidden="true">
-					<path d="M0,0 L0,3 L2,0 Z" />
-				</svg>
-				<a href="/portfolio">Works</a>
-			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<svg viewBox="0 0 2 3" aria-hidden="true">
-					<path d="M0,0 L0,3 L2,0 Z" />
-				</svg>
-				<a href="/about">About</a>
-			</li>
-			<li aria-current={$page.url.pathname.startsWith('/contact') ? 'page' : undefined}>
-				<svg viewBox="0 0 2 3" aria-hidden="true">
-					<path d="M0,0 L0,3 L2,0 Z" />
-				</svg>
-				<a href="/contact">Contact</a>
-			</li>
+			{#each navLinks as navLink}
+				<li aria-current={$page.url.pathname === navLink.link ? 'page' : undefined}>
+					<svg viewBox="0 0 2 3" aria-hidden="true">
+						<path d="M0,0 L0,3 L2,0 Z" />
+					</svg>
+					<a href={navLink.link}>{navLink.text}</a>
+					<svg viewBox="0 0 2 3" aria-hidden="true">
+						<path d="M0,3 L2,3 L2,0 Z" />
+					</svg>
+				</li>
+			{/each}
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 L2,0 Z" />
@@ -101,18 +109,7 @@
 	}
 
 	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: auto;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
 		background: var(--background);
-		background-size: contain;
-
-		flex-wrap: wrap;
 	}
 
 	li {
@@ -141,6 +138,9 @@
 		color: var(--color-text-light);
 	}
 
+	li:hover {
+	}
+
 	nav a {
 		display: flex;
 		height: 100%;
@@ -149,7 +149,6 @@
 		/* color: var(--color-text); */
 		font-weight: 700;
 		font-size: 1rem;
-		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		text-decoration: none;
 		transition: color 0.2s linear;

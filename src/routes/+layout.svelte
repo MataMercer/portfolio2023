@@ -1,7 +1,25 @@
 <script>
+	import '../app.postcss';
 	import '../app.scss';
 	import Header from './Header.svelte';
 	import './styles.scss';
+
+	import { goto, invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	export let data;
+
+	let { supabase, session } = data;
+	$: ({ supabase, session } = data);
+	onMount(() => {
+		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
+			if (_session?.expires_at !== session?.expires_at) {
+				invalidate('supabase:auth');
+			}
+		});
+
+		return () => data.subscription.unsubscribe();
+	});
 </script>
 
 <div class="app">
@@ -12,11 +30,26 @@
 	</main>
 
 	<footer>
-		&#xa9; {new Date().getFullYear()} Mercer Denholm
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div
+			on:click={() => {
+				goto(`/${!session ? 'login' : 'manage/account'}`);
+			}}
+			class="flex flex-col items-center cursor-pointer"
+		>
+			{#if session}
+				<div class="flex flex-row items-center">
+					<img src={session.user.user_metadata.avatar_url} class="px-4 h-10 rounded-lg" />
+
+					<div>{session.user.user_metadata.user_name}</div>
+				</div>
+			{/if}
+			&#xa9; {new Date().getFullYear()} Mercer Denholm
+		</div>
 	</footer>
 </div>
 
-<style>
+<style lang="scss">
 	.app {
 		display: flex;
 		flex-direction: column;

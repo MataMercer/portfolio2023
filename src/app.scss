@@ -1,1 +1,15 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
+input, textarea{
+    width: 100%;
+    padding: 6px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    
+		box-shadow: 10 10px 20px 0 rgba(0,0,0,.063);
+ &:focus{
+    outline: none;
+    border-bottom: 2px solid $color-theme-1;
+    }   
+  }

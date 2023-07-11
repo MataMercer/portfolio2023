@@ -1,5 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
+	import LoadingSpinner from '../LoadingSpinner.svelte';
+	import Spinner from '../LoadingSpinner.svelte';
 
 	// import Counter from './Counter.svelte';
 	// import welcome from '$lib/images/svelte-welcome.webp';
@@ -28,30 +30,16 @@
 	>
 </span>
 
-<section>
-	<h1>Mercer Denholm</h1>
+<section class="flex flex-auto flex-col justify-center items-center">
+	<h1 class="text-7xl/normal text-center">Mercer Denholm</h1>
 
-	<h2>Hi! I'm a developer from Huntington Beach, California.</h2>
+	<h2 class="text-4xl/normal text-center">
+		Hi! I'm a developer from Huntington Beach, California.
+	</h2>
 	<button class="call-to-action-button" on:click={() => goto('/portfolio')}>See my work </button>
 </section>
 
 <style lang="scss">
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-		font-size: 5em;
-	}
-	h2 {
-		font-size: 2.5em;
-	}
-
 	.welcome {
 		display: block;
 		position: relative;

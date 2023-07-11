@@ -7,8 +7,8 @@
 	--color-bg-0: rgb(202, 216, 228);
 	--color-bg-1: hsl(209, 36%, 86%);
 	--color-bg-2: hsl(224, 44%, 95%);
-	--color-theme-1: #ee4266;
-	--color-theme-2:#3bceac;
+	--color-theme-1: #4545b6;
+	--color-theme-2:#beb2c8;
 	--color-theme-3: #0ead69;
 	--color-theme-4: #36413e;
 	--color-theme-5: #ffd23f;
@@ -26,7 +26,7 @@
 body {
 	margin: 0;
 	background-attachment: fixed;
-	background-color: linear-gradient(45deg, rgb(0, 0, 0) 60%, cyan);
+	background-color: $color-page;
 }
 
 h1,
@@ -40,7 +40,7 @@ p {
 }
 
 a {
-	color: var(--color-theme-1);
+	color: $color-theme-1;
 	text-decoration: none;
 }
 
@@ -88,7 +88,7 @@ button:focus:not(:focus-visible) {
 }
 
 button {
-	background-color: var(--color-theme-1);
+	background-color: $color-theme-1;
 	color: white;
 	border-radius: 3em;
   transition: all 0.3s ease 0s;
